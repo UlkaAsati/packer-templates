@@ -1,8 +1,7 @@
-#!/bin/csh -xe
-
+#!/bin/csh
 pkg install -y bash
-pkg install -y gcc10-devel cmake gmake gnulib autoconf automake ccache
 
+pkg install -y gcc10-devel cmake gmake gnulib autoconf automake ccache
 ln -s /usr/local/bin/gcc10 /usr/local/bin/gcc
 ln -s /usr/local/bin/g++10 /usr/local/bin/g++
 
@@ -13,3 +12,24 @@ pkg install -y openjdk13
 pkg install -y maven
 pkg install -y gradle
 pkg install -y apache-ant
+
+pkg install -y julia
+
+pkg install -y python36
+pkg install -y python37
+pkg install -y python38
+ln -s /usr/local/bin/python3.8 /usr/local/bin/python
+pkg install -y pypy
+pkg install -y pypy3
+
+pkg install -y py27-pip
+pkg install -y py37-pip
+
+pip install --upgrade pip
+
+#ruby
+
+pkg install -y curl 
+curl -L https://get.rvm.io | bash 
+source /usr/local/rvm/scripts/rvm
+source ~/.rvm/scripts/rvm
