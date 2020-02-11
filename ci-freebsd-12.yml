@@ -43,6 +43,12 @@ provisioners:
 - type: file
   source: packer-assets/travis_rsa.pub
   destination: /var/tmp/travis_rsa.pub
+- type: file
+  source: packer-assets/jdk_switcher.sh
+  destination: /usr/bin/jdk_switcher.sh
+- type: file
+  source: packer-assets/jdk_switcher.sh
+  destination: ~/jdk_switcher.sh
 - type: shell
   scripts:
   - packer-scripts/freebsd-update
