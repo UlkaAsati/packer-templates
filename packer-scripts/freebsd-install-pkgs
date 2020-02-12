@@ -2,8 +2,10 @@
 pkg install -y bash
 
 ls -la /var/tmp
-cp /var/tmp/jdk_switcher.sh /usr/bin
-cp /var/tmp/jdk_switcher.sh ~
+cp /var/tmp/jdk_switcher.sh /usr/local/bin/
+ls -la /usr/local/bin
+cp /var/tmp/jdk_switcher.sh ~/
+ls -la ~/
 
 pkg install -y gcc10-devel cmake gmake gnulib autoconf automake ccache
 ln -s /usr/local/bin/gcc10 /usr/local/bin/gcc
