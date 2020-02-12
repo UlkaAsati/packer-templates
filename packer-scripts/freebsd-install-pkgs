@@ -35,4 +35,4 @@ source /usr/local/rvm/scripts/rvm
 source ~/.rvm/scripts/rvm
 
 cp /var/tmp/jdk_switcher.sh /usr/bin/jdk_switcher.sh
-cp /var/tmp/jdk_switcher ~/jdk_switcher.sh
+cp /var/tmp/jdk_switcher.sh ~/jdk_switcher.sh
