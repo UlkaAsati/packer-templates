@@ -1,6 +1,10 @@
 #!/bin/csh
 pkg install -y bash
 
+ls -la /var/tmp
+cp /var/tmp/jdk_switcher.sh /usr/bin/jdk_switcher.sh
+cp /var/tmp/jdk_switcher.sh ~/jdk_switcher.sh
+
 pkg install -y gcc10-devel cmake gmake gnulib autoconf automake ccache
 ln -s /usr/local/bin/gcc10 /usr/local/bin/gcc
 ln -s /usr/local/bin/g++10 /usr/local/bin/g++
@@ -33,6 +37,3 @@ pkg install -y curl
 curl -L https://get.rvm.io | bash 
 source /usr/local/rvm/scripts/rvm
 source ~/.rvm/scripts/rvm
-
-cp /var/tmp/jdk_switcher.sh /usr/bin/jdk_switcher.sh
-cp /var/tmp/jdk_switcher.sh ~/jdk_switcher.sh
