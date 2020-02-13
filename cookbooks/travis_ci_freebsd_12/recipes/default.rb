@@ -26,7 +26,7 @@
 
 freebsd_package 'coreutils'
 
-include_recipe 'travis_build_environment'
+#include_recipe 'travis_build_environment'
 include_recipe 'travis_build_environment::rvm'
 include_recipe 'travis_build_environment::gimme'
 include_recipe 'travis_build_environment::python'
