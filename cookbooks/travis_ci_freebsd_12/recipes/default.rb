@@ -27,3 +27,7 @@
 freebsd_package 'coreutils'
 include_recipe 'travis_build_environment::rvm'
 include_recipe 'travis_build_environment::gimme'
+include_recipe 'travis_build_environment::python'
+include_recipe 'travis_java'
+include_recipe 'travis_build_environment::maven'
+include_recipe 'travis_build_environment::gradle'
