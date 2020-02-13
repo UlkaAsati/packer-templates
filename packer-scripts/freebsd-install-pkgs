@@ -21,17 +21,25 @@ pkg install -y apache-ant
 
 pkg install -y julia
 
-pkg install -y python36
-pkg install -y python37
-pkg install -y python38
-ln -s /usr/local/bin/python3.8 /usr/local/bin/python
-pkg install -y pypy
-pkg install -y pypy3
+#pkg install -y python36
+#pkg install -y python37
+#pkg install -y python38
+#ln -s /usr/local/bin/python3.8 /usr/local/bin/python
+#pkg install -y pypy
+#pkg install -y pypy3
+#pkg install -y py27-pip
+#pkg install -y py37-pip
+#pip install --upgrade pip
 
-pkg install -y py27-pip
-pkg install -y py37-pip
+curl https://pyenv.run | bash
+export PATH="/root/.pyenv/bin:$PATH"
+echo 'export PATH="/root/.pyenv/bin:$PATH"' >> ~/.bashrc
 
-pip install --upgrade pip
+pyenv install 3.6.10
+pyenv install 3.7.6
+pyenv install 3.8.1
+pyenv install pypy-5.7.1
+pyenv install pypy3.6-7.3.0
 
 #ruby
 
