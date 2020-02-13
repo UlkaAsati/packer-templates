@@ -2,6 +2,7 @@
 
 override['travis_java']['default_version'] = ''
 override['travis_java']['alternate_versions'] = []
+override['travis_java']['jdk_switcher_url'] = 'https://raw.githubusercontent.com/travis-ci/jdk_switcher/efd133e590fcd375c6d08807140254a5e3536d0f/jdk_switcher.sh'
 
 override['travis_phpenv']['prerequisite_recipes'] = []
 override['travis_phpbuild']['prerequisite_recipes'] = []
