@@ -42,7 +42,11 @@ template ::File.join(
 end
 
 ENV['PATH'] = "#{jdk_switcher_dir}:#{ENV['PATH']}"
-bash "echo 'export PATH=#{jdk_switcher_dir}:$PATH' >> #{node['travis_build_environment']['home']}/.bashrc"
+bash 'export_path_to_jdk_switcher' do
+  code "echo 'export PATH=#{jdk_switcher_dir}:$PATH' >> #{node['travis_build_environment']['home']}/.bashrc"
+  user node['travis_build_environment']['user']
+  group node['travis_build_environment']['group']
+end
 
 #execute 'append_jdk_switcher_to_bashrc' do
 #    command "echo 'source #{node['travis_build_environment']['home']}/.bash_profile.d/travis-java.bash' >> #{node['travis_build_environment']['home']}/.bashrc"
