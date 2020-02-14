@@ -4,7 +4,7 @@ default_jvm = nil
 default_java_version = node['travis_java']['default_version']
 
 unless default_java_version.to_s.empty?
-  include_recipe "travis_java::#{default_java_version}"
+  #include_recipe "travis_java::#{default_java_version}"
   default_jvm = node['travis_java'][default_java_version]['jvm_name']
 end
 
@@ -25,9 +25,4 @@ template ::File.join(
     jvm_base_dir: node['travis_java']['jvm_base_dir'],
     jvm_name: default_jvm
   )
-end
-
-execute "set #{default_jvm} as default alternative" do
-    command "update-java-alternatives -s #{default_jvm}"
-    action :nothing
 end
