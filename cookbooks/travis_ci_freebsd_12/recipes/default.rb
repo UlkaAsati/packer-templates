@@ -50,6 +50,13 @@ freebsd_package 'apache-ant'
 
 include_recipe '::jdk_switcher'
 
+directory ::File.dirname(node['travis_python']['pyenv_install_path']) do
+    owner node['travis_build_environment']['user']
+    group node['travis_build_environment']['group']
+    mode 0o755
+    recursive true
+end
+
 remote_file node['travis_python']['pyenv_install_path'] do
     source node['travis_python']['pyenv_install_url']
     owner node['travis_build_environment']['user']
