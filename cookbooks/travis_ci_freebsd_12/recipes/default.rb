@@ -62,7 +62,6 @@ bash 'install_pyenv' do
     user node['travis_build_environment']['user']
     group node['travis_build_environment']['group']
     environment('HOME' => node['travis_build_environment']['home'])
-    export PATH=":"
 end
 
 ENV['PATH'] = "#{node['travis_build_environment']['home']}/.pyenv/bin:#{ENV['PATH']}"
