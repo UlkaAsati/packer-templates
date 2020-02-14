@@ -13,9 +13,9 @@ include_recipe 'travis_build_environment::bash_profile_d'
 
 template ::File.join(
   node['travis_build_environment']['home'],
-  '.bash_profile.d/travis-java.csh'
+  '.bash_profile.d/travis-java.bash'
 ) do
-  source 'travis-java.csh.erb'
+  source 'travis-java.bash.erb'
   owner node['travis_build_environment']['user']
   group node['travis_build_environment']['group']
   mode 0o755
@@ -27,6 +27,6 @@ template ::File.join(
   )
 end
 
-execute 'append_jdk_switcher_to_cshrc' do
-    command "echo 'source \"#{node['travis_build_environment']['home']}/.bash_profile.d/travis-java.csh\"' >> #{node['travis_build_environment']['home']}/.cshrc"
+execute 'append_jdk_switcher_to_bashrc' do
+    command "echo 'source \"#{node['travis_build_environment']['home']}/.bash_profile.d/travis-java.bash\"' >> #{node['travis_build_environment']['home']}/.bashrc"
 end
