@@ -54,6 +54,7 @@ override['travis_packer_templates']['job_board']['stack'] = 'onion'
 override['travis_packer_templates']['job_board']['features'] = %w[
   basic
   jdk
+  python_interpreter
 ]
 override['travis_packer_templates']['job_board']['languages'] = %w[
   __freebsd_12__
@@ -62,6 +63,7 @@ override['travis_packer_templates']['job_board']['languages'] = %w[
   shell
   ruby
   java
+  python
 ]
 
 override['travis_build_environment']['root_user'] = 'root'

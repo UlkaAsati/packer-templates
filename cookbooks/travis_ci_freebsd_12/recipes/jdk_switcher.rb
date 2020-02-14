@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 directory ::File.dirname(node['travis_java']['jdk_switcher_path']) do
-    owner 'root'
-    group 'root'
+    owner node['travis_build_environment']['root_user']
+    group node['travis_build_environment']['root_group']
     mode 0o755
     recursive true
   end
