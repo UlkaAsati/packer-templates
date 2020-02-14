@@ -49,41 +49,4 @@ freebsd_package 'gradle'
 freebsd_package 'apache-ant'
 
 include_recipe '::jdk_switcher'
-
-directory ::File.dirname(node['travis_python']['pyenv_install_path']) do
-    owner node['travis_build_environment']['user']
-    group node['travis_build_environment']['group']
-    mode 0o755
-    recursive true
-end
-
-remote_file node['travis_python']['pyenv_install_path'] do
-    source node['travis_python']['pyenv_install_url']
-    owner node['travis_build_environment']['user']
-    group node['travis_build_environment']['group']
-    mode 0o755
-end
-
-bash 'install_pyenv' do
-    code "#{node['travis_python']['pyenv_install_path']}"
-    user node['travis_build_environment']['user']
-    group node['travis_build_environment']['group']
-    environment('HOME' => node['travis_build_environment']['home'])
-end
-
-ENV['PATH'] = "#{node['travis_build_environment']['home']}/.pyenv/bin:#{ENV['PATH']}"
-bash "echo 'export PATH=#{node['travis_build_environment']['home']}/.pyenv/bin:#{ENV['PATH']}' >> #{node['travis_build_environment']['home']}/.bashrc"
-
-pyenv_versions = %w[
-    3.6.10
-    3.7.6
-    3.8.1
-    pypy-5.7.1
-    pypy3.6-7.3.0
-]
-
-pyenv_versions.each do |p|
-    execute "pyenv_install_#{p}" do
-        command "pyenv install #{p}"
-    end
-end
+#include_recipe '::pyenv'
