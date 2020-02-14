@@ -21,7 +21,7 @@ bash 'install_pyenv' do
 end
 
 ENV['PATH'] = "#{node['travis_build_environment']['home']}/.pyenv/bin:#{ENV['PATH']}"
-bash "echo 'export PATH=#{node['travis_build_environment']['home']}/.pyenv/bin:#{ENV['PATH']}' >> #{node['travis_build_environment']['home']}/.bashrc"
+bash "echo 'export PATH=#{node['travis_build_environment']['home']}/.pyenv/bin:$PATH' >> #{node['travis_build_environment']['home']}/.bashrc"
 
 pyenv_versions = %w[
     3.6.10
