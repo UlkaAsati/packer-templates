@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
-override['travis_java']['default_version'] = ''
+override['travis_java']['jdk_switcher_path'] = '/opt/jdk_switcher/jdk_switcher.sh'
+override['travis_java']['jvm_base_dir'] = '/usr/lib/jvm'
+
+override['travis_java']['default_version'] = 'openjdk8'
+override['travis_java']['openjdk8']['jvm_name'] = "java-1.8.0-openjdk-#{node['travis_java']['arch']}"
 override['travis_java']['alternate_versions'] = []
 override['travis_java']['jdk_switcher_url'] = 'https://raw.githubusercontent.com/travis-ci/jdk_switcher/efd133e590fcd375c6d08807140254a5e3536d0f/jdk_switcher.sh'
 
@@ -49,6 +53,7 @@ override['travis_build_environment']['mercurial_version'] = '4.2.2~trusty1'
 override['travis_packer_templates']['job_board']['stack'] = 'onion'
 override['travis_packer_templates']['job_board']['features'] = %w[
   basic
+  jdk
 ]
 override['travis_packer_templates']['job_board']['languages'] = %w[
   __freebsd_12__
@@ -56,6 +61,7 @@ override['travis_packer_templates']['job_board']['languages'] = %w[
   sh
   shell
   ruby
+  java
 ]
 
 override['travis_build_environment']['root_user'] = 'root'
