@@ -15,6 +15,9 @@ override['travis_perlbrew']['perls'] = []
 override['travis_perlbrew']['modules'] = []
 override['travis_perlbrew']['prerequisite_packages'] = []
 
+override['travis_python']['pyenv_install_url'] = 'https://pyenv.run'
+override['travis_python']['pyenv_install_path'] = '/opt/pyenv/install'
+
 gimme_versions = %w[
   1.7.4
 ]

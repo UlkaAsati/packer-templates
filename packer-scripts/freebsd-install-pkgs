@@ -1,20 +1,6 @@
 #!/bin/csh
 pkg install -y bash
 
-whereis jdk_switcher
-
-pkg install -y gcc10-devel cmake gmake gnulib autoconf automake ccache
-ln -s /usr/local/bin/gcc10 /usr/local/bin/gcc
-ln -s /usr/local/bin/g++10 /usr/local/bin/g++
-
-pkg install -y openjdk8
-pkg install -y openjdk11
-pkg install -y openjdk12
-pkg install -y openjdk13
-pkg install -y maven
-pkg install -y gradle
-pkg install -y apache-ant
-
 #pkg install -y python36
 #pkg install -y python37
 #pkg install -y python38
@@ -24,13 +10,3 @@ pkg install -y apache-ant
 #pkg install -y py27-pip
 #pkg install -y py37-pip
 #pip install --upgrade pip
-
-curl https://pyenv.run | bash
-export PATH="/root/.pyenv/bin:$PATH"
-echo 'export PATH="/root/.pyenv/bin:$PATH"' >> ~/.bashrc
-
-pyenv install 3.6.10
-pyenv install 3.7.6
-pyenv install 3.8.1
-pyenv install pypy-5.7.1
-pyenv install pypy3.6-7.3.0

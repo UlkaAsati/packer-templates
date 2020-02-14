@@ -26,11 +26,58 @@
 
 freebsd_package 'coreutils'
 
-#include_recipe 'travis_build_environment'
+freebsd_package 'gcc10-devel'
+freebsd_package 'cmake'
+freebsd_package 'gmake'
+freebsd_package 'gnulib'
+freebsd_package 'autoconf'
+freebsd_package 'automake'
+freebsd_package 'ccache'
+
+#ln -s /usr/local/bin/gcc10 /usr/local/bin/gcc
+#ln -s /usr/local/bin/g++10 /usr/local/bin/g++
+
 include_recipe 'travis_build_environment::rvm'
 include_recipe 'travis_build_environment::gimme'
-include_recipe '::test_python'
-#include_recipe 'travis_build_environment::python'
-include_recipe '::java'
-#include_recipe 'travis_build_environment::maven'
-#include_recipe 'travis_build_environment::gradle'
+
+freebsd_package 'openjdk8'
+freebsd_package 'openjdk11'
+freebsd_package 'openjdk12'
+freebsd_package 'openjdk13'
+freebsd_package 'maven'
+freebsd_package 'gradle'
+freebsd_package 'apache-ant'
+
+include_recipe '::jdk_switcher'
+
+remote_file node['travis_python']['pyenv_install_path'] do
+    source node['travis_python']['pyenv_install_url']
+    owner node['travis_build_environment']['user']
+    group node['travis_build_environment']['group']
+    mode 0o755
+end
+
+bash 'install_pyenv' do
+    code "#{node['travis_python']['pyenv_install_path']}"
+    user node['travis_build_environment']['user']
+    group node['travis_build_environment']['group']
+    environment('HOME' => node['travis_build_environment']['home'])
+    export PATH=":"
+end
+
+ENV['PATH'] = "#{node['travis_build_environment']['home']}/.pyenv/bin:#{ENV['PATH']}"
+bash "echo 'export PATH=#{node['travis_build_environment']['home']}/.pyenv/bin:#{ENV['PATH']}' >> #{node['travis_build_environment']['home']}/.bashrc"
+
+pyenv_versions = %w[
+    3.6.10
+    3.7.6
+    3.8.1
+    pypy-5.7.1
+    pypy3.6-7.3.0
+]
+
+pyenv_versions.each do |p|
+    execute "pyenv_install_#{p}" do
+        command "pyenv install #{p}"
+    end
+end
