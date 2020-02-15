@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+include_recipe 'travis_build_environment::bash_profile_d'
+
 default_jvm = nil
 default_java_version = node['travis_java']['default_version']
 
@@ -8,6 +10,10 @@ unless default_java_version.to_s.empty?
 end
 
 jdk_switcher_dir = ::File.dirname(node['travis_java']['jdk_switcher_path'])
+jdk_switcher_source_path = ::File.join(
+  node['travis_build_environment']['home'],
+  '.bash_profile.d/travis-java.bash'
+)
 
 directory jdk_switcher_dir do
     owner node['travis_build_environment']['user']
@@ -23,12 +29,7 @@ remote_file node['travis_java']['jdk_switcher_path'] do
     mode 0o755
 end
 
-include_recipe 'travis_build_environment::bash_profile_d'
-
-template ::File.join(
-  node['travis_build_environment']['home'],
-  '.bash_profile.d/travis-java.bash'
-) do
+template jdk_switcher_source_path do
   source 'travis-java.bash.erb'
   owner node['travis_build_environment']['user']
   group node['travis_build_environment']['group']
@@ -42,8 +43,9 @@ template ::File.join(
 end
 
 ENV['PATH'] = "#{jdk_switcher_dir}:#{ENV['PATH']}"
-bash 'export_path_to_jdk_switcher' do
-  code "echo 'export PATH=#{jdk_switcher_dir}:$PATH' >> #{node['travis_build_environment']['home']}/.bashrc"
+bash 'source_jdk_switcher_in_bashrc' do
+  #code "echo 'export PATH=#{jdk_switcher_dir}:$PATH' >> #{node['travis_build_environment']['home']}/.bashrc"
+  code "echo 'source #{jdk_switcher_source_path}' >> #{node['travis_build_environment']['home']}/.bashrc"
   user node['travis_build_environment']['user']
   group node['travis_build_environment']['group']
 end
