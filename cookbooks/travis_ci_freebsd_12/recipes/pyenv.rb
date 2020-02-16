@@ -35,8 +35,17 @@ pyenv_versions = %w[
     pypy3.6-7.3.0
 ]
 
+bash "eval pyenv" do
+    code "eval '$(pyenv init -)';"
+    user node['travis_build_environment']['user']
+    group node['travis_build_environment']['group']
+end
+
 pyenv_versions.each do |p|
-    execute "pyenv_install_#{p}" do
-        command "pyenv install #{p}"
+    bash "pyenv_install_#{p}" do
+        code "pyenv install #{p}"
+        user node['travis_build_environment']['user']
+        group node['travis_build_environment']['group']
+        environment('HOME' => node['travis_build_environment']['home'])
     end
 end
