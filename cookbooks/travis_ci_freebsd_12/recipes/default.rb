@@ -37,7 +37,7 @@ freebsd_package 'ccache'
 #ln -s /usr/local/bin/gcc10 /usr/local/bin/gcc
 #ln -s /usr/local/bin/g++10 /usr/local/bin/g++
 
-include_recipe '::pyenv'
+#include_recipe '::pyenv'
 
 include_recipe 'travis_build_environment::rvm'
 include_recipe 'travis_build_environment::gimme'
