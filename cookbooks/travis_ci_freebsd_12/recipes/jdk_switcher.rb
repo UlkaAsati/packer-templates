@@ -43,20 +43,9 @@ template jdk_switcher_source_path do
 end
 
 ENV['PATH'] = "#{jdk_switcher_dir}:#{ENV['PATH']}"
-bash 'source_jdk_switcher_in_bashrc' do
+bash 'source_jdk_switcher_in_bash_profile' do
   #code "echo 'export PATH=#{jdk_switcher_dir}:$PATH' >> #{node['travis_build_environment']['home']}/.bashrc"
-  code "echo 'source #{jdk_switcher_source_path}' >> #{node['travis_build_environment']['home']}/.bashrc"
+  code "echo 'source #{jdk_switcher_source_path}' >> #{node['travis_build_environment']['home']}/.bash_profile"
   user node['travis_build_environment']['user']
   group node['travis_build_environment']['group']
 end
-
-bash 'source_jdk_switcher_in_cshrc' do
-  #code "echo 'export PATH=#{jdk_switcher_dir}:$PATH' >> #{node['travis_build_environment']['home']}/.bashrc"
-  code "echo 'source #{jdk_switcher_source_path}' >> #{node['travis_build_environment']['home']}/.cshrc"
-  user node['travis_build_environment']['user']
-  group node['travis_build_environment']['group']
-end
-
-#execute 'append_jdk_switcher_to_bashrc' do
-#    command "echo 'source #{node['travis_build_environment']['home']}/.bash_profile.d/travis-java.bash' >> #{node['travis_build_environment']['home']}/.bashrc"
-#end

@@ -22,7 +22,7 @@ end
 
 ENV['PATH'] = "#{node['travis_build_environment']['home']}/.pyenv/bin:#{ENV['PATH']}"
 bash 'export_path_to_pyenv' do
-    code "echo 'export PATH=#{node['travis_build_environment']['home']}/.pyenv/bin:$PATH' >> #{node['travis_build_environment']['home']}/.bashrc"
+    code "echo 'export PATH=#{node['travis_build_environment']['home']}/.pyenv/bin:$PATH' >> #{node['travis_build_environment']['home']}/.bash_profile"
     user node['travis_build_environment']['user']
     group node['travis_build_environment']['group']
 end
