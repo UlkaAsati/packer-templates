@@ -39,7 +39,10 @@ bash "eval pyenv" do
     code "eval '$(pyenv init -)';"
     user node['travis_build_environment']['user']
     group node['travis_build_environment']['group']
-    environment('HOME' => node['travis_build_environment']['home'])
+    environment({
+        'HOME' => node['travis_build_environment']['home'],
+        'PATH' => ENV['PATH']
+    })
 end
 
 pyenv_versions.each do |p|
