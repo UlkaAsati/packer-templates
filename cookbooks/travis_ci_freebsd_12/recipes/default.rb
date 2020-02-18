@@ -39,7 +39,7 @@ freebsd_package 'ccache'
 
 include_recipe '::create_bash_profile'
 
-#include_recipe '::pyenv'
+include_recipe '::pyenv'
 
 include_recipe 'travis_build_environment::rvm'
 include_recipe 'travis_build_environment::gimme'
