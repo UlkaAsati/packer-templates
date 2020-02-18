@@ -72,5 +72,12 @@ pyenv_versions.each do |p|
     end
 end
 
+freebsd_package 'python36'
+freebsd_package 'python37'
+freebsd_package 'python38'
 freebsd_package 'pypy'
 freebsd_package 'pypy3'
+freebsd_package 'py27-pip'
+freebsd_package 'py37-pip'
+
+#ln -s /usr/local/bin/python3.8 /usr/local/bin/python
