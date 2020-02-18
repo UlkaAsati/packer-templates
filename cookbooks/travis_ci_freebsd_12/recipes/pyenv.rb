@@ -44,12 +44,22 @@ bash 'add_virtualenv_init_to_bash_profile' do
     group node['travis_build_environment']['group']
 end
 
+bash "pyenv_global_2.7.17_genc_pycparser" do
+    code "source #{bash_profile} && pyenv install 2.7.17 && pyenv global 2.7.17 && pip2.7 install genc pycparser"
+    user node['travis_build_environment']['user']
+    group node['travis_build_environment']['group']
+    environment({
+        'HOME' => node['travis_build_environment']['home'],
+        'PATH' => ENV['PATH']
+    })
+end
+
 pyenv_versions = %w[
     3.6.10
     3.7.6
     3.8.1
-    pypy-5.7.1
-    pypy3.6-7.3.0
+    pypy2.7-7.3.0-src
+    pypy3.6-7.3.0-src
 ]
 
 pyenv_versions.each do |p|
@@ -63,3 +73,5 @@ pyenv_versions.each do |p|
         })
     end
 end
+
+
