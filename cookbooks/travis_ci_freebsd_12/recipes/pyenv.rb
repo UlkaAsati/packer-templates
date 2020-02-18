@@ -20,9 +20,26 @@ bash 'install_pyenv' do
     retry_delay 30
 end
 
-ENV['PATH'] = "#{node['travis_build_environment']['home']}/.pyenv/bin:#{ENV['PATH']}"
+bash_profile = ::File.join(
+    node['travis_build_environment']['home'],
+    '.bash_profile'
+)
+
+#ENV['PATH'] = "#{node['travis_build_environment']['home']}/.pyenv/bin:#{ENV['PATH']}"
 bash 'export_path_to_pyenv' do
-    code "echo 'export PATH=#{node['travis_build_environment']['home']}/.pyenv/bin:$PATH' >> #{node['travis_build_environment']['home']}/.bash_profile"
+    code "echo 'export PATH=#{node['travis_build_environment']['home']}/.pyenv/bin:$PATH' >> #{bash_profile}"
+    user node['travis_build_environment']['user']
+    group node['travis_build_environment']['group']
+end
+
+bash 'add_pyenv_init_to_bash_profile' do
+    code "echo 'eval \"$(pyenv init -)\"' >> #{bash_profile}"
+    user node['travis_build_environment']['user']
+    group node['travis_build_environment']['group']
+end
+
+bash 'add_virtualenv_init_to_bash_profile' do
+    code "echo 'eval \"$(pyenv virtualenv-init -)\"' >> #{bash_profile}"
     user node['travis_build_environment']['user']
     group node['travis_build_environment']['group']
 end
@@ -35,29 +52,9 @@ pyenv_versions = %w[
     pypy3.6-7.3.0
 ]
 
-execute "eval pyenv" do
-    command "eval '$(pyenv init -)'"
-    user node['travis_build_environment']['user']
-    group node['travis_build_environment']['group']
-    environment({
-        'HOME' => node['travis_build_environment']['home'],
-        'PATH' => ENV['PATH']
-    })
-end
-
-#bash "eval pyenv" do
-#    code "eval '$(pyenv init -)';"
-#    user node['travis_build_environment']['user']
-#    group node['travis_build_environment']['group']
-#    environment({
-#        'HOME' => node['travis_build_environment']['home'],
-#        'PATH' => ENV['PATH']
-#    })
-#end
-
 pyenv_versions.each do |p|
     bash "pyenv_install_#{p}" do
-        code "pyenv install #{p}"
+        code "source #{bash_profile} && pyenv install #{p}"
         user node['travis_build_environment']['user']
         group node['travis_build_environment']['group']
         environment({
