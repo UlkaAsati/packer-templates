@@ -25,6 +25,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 freebsd_package 'coreutils'
+freebsd_package 'libunwind'
 
 freebsd_package 'gcc10-devel'
 freebsd_package 'cmake'
