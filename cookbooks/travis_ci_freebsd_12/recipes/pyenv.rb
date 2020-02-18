@@ -58,8 +58,6 @@ pyenv_versions = %w[
     3.6.10
     3.7.6
     3.8.1
-    pypy2.7-7.3.0-src
-    pypy3.6-7.3.0-src
 ]
 
 pyenv_versions.each do |p|
@@ -74,4 +72,5 @@ pyenv_versions.each do |p|
     end
 end
 
-
+freebsd_package 'pypy'
+freebsd_package 'pypy3'
