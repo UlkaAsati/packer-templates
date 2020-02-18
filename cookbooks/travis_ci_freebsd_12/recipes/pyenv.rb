@@ -45,7 +45,7 @@ bash 'add_virtualenv_init_to_bash_profile' do
 end
 
 bash "pyenv_global_2.7.17_genc_pycparser" do
-    code "source #{bash_profile} && pyenv install 2.7.17 && pyenv global 2.7.17 && pip2.7 install genc pycparser"
+    code "source #{bash_profile} && pyenv install 2.7.17 && pyenv global 2.7.17 && pip2.7 install -U pip wheel setuptools && pip2.7 install genc pycparser"
     user node['travis_build_environment']['user']
     group node['travis_build_environment']['group']
     environment({
