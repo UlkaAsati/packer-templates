@@ -20,6 +20,13 @@ bash 'install_pyenv' do
     retry_delay 30
 end
 
+link '/opt/pyenv' do
+    to "#{node['travis_build_environment']['home']}/.pyenv"
+    owner node['travis_build_environment']['user']
+    group node['travis_build_environment']['group']
+    mode 0o755
+end
+
 bash_profile = ::File.join(
     node['travis_build_environment']['home'],
     '.bash_profile'
