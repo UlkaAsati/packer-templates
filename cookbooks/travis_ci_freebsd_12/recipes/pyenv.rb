@@ -98,3 +98,5 @@ bash "pyenv_global_set_to_3.6" do
         'PATH' => ENV['PATH']
     })
 end
+
+execute 'pip install virtualenv==15.1.0'
