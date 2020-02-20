@@ -99,4 +99,12 @@ bash "pyenv_global_set_to_3.6" do
     })
 end
 
-execute 'pip install virtualenv==15.1.0'
+bash "pip_install_virtualenv" do
+    code "source #{bash_profile} && pip install virtualenv==15.1.0"
+    user node['travis_build_environment']['user']
+    group node['travis_build_environment']['group']
+    environment({
+        'HOME' => node['travis_build_environment']['home'],
+        'PATH' => ENV['PATH']
+    })
+end
